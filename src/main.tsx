@@ -1,6 +1,6 @@
 
 import "./index.css";
-import { App } from "~/components/root/App";
+import { App } from "~/App";
 
 import { createRoot } from 'react-dom/client';
 

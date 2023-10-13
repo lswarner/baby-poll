@@ -1,21 +1,28 @@
 
-export interface Question {
+export interface TextQuestion {
     text: string;
     subtext?: string;
-    type: `text` | `multiple choice`;
-    options?: Array<{text:string, subtext?: string}>;
+    type: `text`;
     instructions?: string;
     placeholder?: string;
 }
 
-export const questions: Array<Question> = [
+export interface MultipleChoiceQuestion {
+    text: string;
+    subtext?: string;
+    type: `multiple choice`;
+    options: Array<{text:string, subtext?: string}>;
+    instructions?: string;
+}
+
+export const questions: Array<TextQuestion | MultipleChoiceQuestion> = [
     {
         text: `What will her birthday be?`,
         subtext: `The due date is November 7`,
         type: `text`,
         instructions: `Enter your answer with the full month written out`,
         placeholder: `November 7`
-    },
+    } as TextQuestion,
     {
         text: `What time of day will she be born?`,
         subtext: "All time are MST, obvs",
@@ -27,7 +34,7 @@ export const questions: Array<Question> = [
             { text: `Late Night: 10pm - 2 am`}, 
             { text: `Early Morning: 2am - 7am`}
         ],
-    },
+    } as MultipleChoiceQuestion,
     {
         text: `What style will her FIRST name be?`,
         type: `multiple choice`,
@@ -40,7 +47,7 @@ export const questions: Array<Question> = [
             { text: `Hipster`, subtext: `ex: Beatrix, Cleo, Nova, Luna, Pandora` },
             { text: `Gender Neutral`, subtext: `Avery, Morgan, Parker, Taylor` },
         ],
-    },
+    } as MultipleChoiceQuestion,
     {
         text: `What style will her MIDDLE name be?`,
         type: `multiple choice`,
@@ -55,29 +62,29 @@ export const questions: Array<Question> = [
         ],
     },
     {
-        text: `Guess the baby's full name (or make a suggestion)`,
+        text: `Guess the baby's name (or make a suggestion)`,
         subtext: `Maybe we'll pick your choice! (seriously)`,
         type: `text`,
-    },
+    } as TextQuestion,
     {
         text: `How tall will she be?`,
-        subtext: `The average girl measures 19.4". Owen was tall.`,
+        subtext: `The average girl measures 19.4". Owen was tall 21.25" tall.`,
         type: `text`,
         instructions: `Please use inches ("). This is an American app and it does not know metric.`,
         placeholder: `19.4"`
-    },
+    } as TextQuestion,
     {
-        text: `What will she weight?`,
+        text: `What will she weigh?`,
         subtext: `The average girl weighs 7 lb, 1 oz. Owen weighed 7 lb, 5 oz.`,
         type: `text`,
         instructions: `Please use lbs and oz. Again, no hablo metric.`,
         placeholder: `7 lb, 1 oz`,
-    },
+    } as TextQuestion,
     {
         text: `How big will the bump get?`,
-        subtext: ``,
+        subtext: `The circumference of the girth was 42.75" on October 12.`,
         type: `text`,
         instructions: `Please inches (") people.`,
         placeholder: ``
-    }
+    } as TextQuestion
 ]
