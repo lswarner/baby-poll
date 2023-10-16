@@ -10,23 +10,26 @@ const Questions = () => {
     const [responses, setResponses] = useLocalStorage<string[]>('responses', []);
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        if(count > questions.length){
-            navigate('/summary')
-        }
-    })
+    const storeGuess = async (guess: string) => {
+        console.log(`storing new guess: ${guess}`);
 
-    const storeGuess = (guess: string) => {
+        // store guess locally
         const newResponses= responses;
         newResponses[count] = guess;
         setResponses(newResponses);
+        console.log(`updated responses: ${JSON.stringify(newResponses)}`)
         
-        setCount(count + 1);
+        if(count < questions.length - 1){
+            setCount(count + 1);
+        }
+        else {
+            navigate('/summary')
+        }
     }
 
     useEffect(() => {
-        console.log(`responses: ${JSON.stringify(responses)}`)
-    }, [responses, count])
+        console.log(responses.join('\n'))
+    }, [count])
 
     const q= questions[count];
 
@@ -64,14 +67,13 @@ const Questions = () => {
                                 isFirst={count === 0}
                             />
                         }
-                        
-
                     </div>
                 </div>
             </div>
         </div>
     )
 }
+
 
 interface RenderTextQuestionProps {
     question: TextQuestion;
@@ -88,7 +90,7 @@ const RenderTextQuestion: FC<RenderTextQuestionProps> = ({
     isFirst,
 }) => {
     const [guess, setGuess] = useState<string>();
-    console.log(`Question ${question.text} has a stored guess: '${storedGuess}' and current guess '${guess}'`);
+    // console.log(`Question ${question.text} has a stored guess: '${storedGuess}' and current guess '${guess}'`);
 
     useEffect(() => {
         if(storedGuess){
@@ -103,6 +105,7 @@ const RenderTextQuestion: FC<RenderTextQuestionProps> = ({
     }
     const handleButtonClick = () => {
         if(guess){
+            console.log(`submitting guess: ${guess}`)
             onSubmit(guess);
             setGuess('');
         }
@@ -127,14 +130,14 @@ const RenderTextQuestion: FC<RenderTextQuestionProps> = ({
                 <div className={`pt-2 flex flex-row ${isFirst ? 'justify-end' : 'justify-between'}`}>
 
                     { !isFirst && <button 
-                        className="btn bg-zinc-300 border-zinc-800 w-full hover:bg-zinc-200 font-display text-2xl w-1/3 mr-2"
+                        className="btn bg-zinc-300 border-zinc-800 hover:bg-zinc-200 font-display text-2xl w-1/3 mr-2"
                         onClick={handleBackButtonClick}
                     >
                         Back
                     </button>
                     }
                     <button 
-                        className="btn bg-primary border-primary-content w-full hover:bg-primary-focus font-display text-2xl w-2/3"
+                        className="btn bg-primary border-primary-content hover:bg-primary-focus font-display text-2xl w-2/3"
                         onClick={handleButtonClick}
                     >
                         Save Answer
@@ -162,7 +165,7 @@ const RenderMultipleChoiceQuestion: FC<RenderMultipleChoiceQuestionProps> = ({
 }) => {
     const [selectedIndex, setSelectedIndex]= useState<number>();
 
-    console.log(`Question ${question.text} has a stored guess: '${storedGuess}' and current guess '${selectedIndex ? question.options[selectedIndex].text : ''}'`);
+    // console.log(`Question ${question.text} has a stored guess: '${storedGuess}' and current guess '${selectedIndex ? question.options[selectedIndex].text : ''}'`);
 
     useEffect(() => {
         if(storedGuess){
@@ -195,7 +198,7 @@ const RenderMultipleChoiceQuestion: FC<RenderMultipleChoiceQuestionProps> = ({
     }
 
     useEffect(()=>{
-        console.log(`index: ${selectedIndex}`)
+        // console.log(`index: ${selectedIndex}`)
     }, [selectedIndex]);
 
     return (
@@ -207,7 +210,7 @@ const RenderMultipleChoiceQuestion: FC<RenderMultipleChoiceQuestionProps> = ({
                     </label>
                 )}
                 { question.options?.map((option, i) => {
-                    console.log(`${typeof i} =?= ${typeof selectedIndex}: ${i === selectedIndex}`)
+                    // console.log(`${typeof i} =?= ${typeof selectedIndex}: ${i === selectedIndex}`)
                     return (
                     <div key={i} className="flex gap-x-3">
                         <div className="flex h-6 items-center mt-1">
@@ -229,16 +232,17 @@ const RenderMultipleChoiceQuestion: FC<RenderMultipleChoiceQuestionProps> = ({
                     </div>
                 )})}
             </div>
+
             <div className={`flex flex-row ${isFirst ? 'justify-end' : 'justify-between'}`} >
                 { !isFirst && <button 
-                    className="btn bg-zinc-300 border-zinc-800 w-full hover:bg-zinc-200 font-display text-2xl w-1/3 mr-2"
+                    className="btn bg-zinc-300 border-zinc-800 hover:bg-zinc-200 font-display text-2xl w-1/3 mr-2"
                     onClick={handleBackButtonClick}
                 >
                     Back
                 </button>
                 }
                 <button 
-                    className="btn bg-primary border-primary-content w-full hover:bg-primary-focus font-display text-2xl w-2/3"
+                    className="btn bg-primary border-primary-content  hover:bg-primary-focus font-display text-2xl w-2/3"
                     onClick={handleButtonClick}
                 >
                     Save Answer
