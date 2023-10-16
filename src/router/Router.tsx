@@ -5,6 +5,7 @@ const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p
 
 const IndexScreen = lazy(() => import('~/screens/Index'));
 const QuestionsScreen = lazy(() => import('~/screens/Questions'));
+const SummaryScreen = lazy(() => import('~/screens/Summary'));
 const Page404Screen = lazy(() => import('~/screens/404'));
 
 function Layout() {
@@ -67,6 +68,20 @@ const InnerRouter = () => {
         {
           index: true,
           element: <QuestionsScreen />,
+        },
+        {
+          path: '*',
+          element: <Page404Screen />,
+        },
+      ],
+    },
+    {
+      path: '/summary',
+      element: <Layout />,
+      children: [
+        {
+          index: true,
+          element: <SummaryScreen />,
         },
         {
           path: '*',
