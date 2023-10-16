@@ -1,6 +1,6 @@
 import type { EntityCollection, GroupEntity } from './types'
 
-import { fetchGroupById, storeParticipant, storeParticipantsGuesses } from './entities/groups'
+import { fetchGroupById, fetchOrCreateParticipant, storeParticipantsGuesses } from './entities/groups'
 
 const initialEntityCollection = {
     id: [],
@@ -15,6 +15,6 @@ export type {
 export {
     initialEntityCollection,
     fetchGroupById,
-    storeParticipant,
+    fetchOrCreateParticipant,
     storeParticipantsGuesses
 }

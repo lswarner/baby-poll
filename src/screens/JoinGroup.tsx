@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom"
 import { useLocalStorage } from '~/hooks/useLocalStorage';
 
-import { fetchGroupById, storeParticipant, type GroupEntity } from "~/firebase";
+import { fetchGroupById, fetchOrCreateParticipant, type GroupEntity } from "~/firebase";
 
 
 const JoinGroup = () => {
     const [groupId, setGroupId] = useLocalStorage<string>('groupId', '')
     const [name, setName] = useLocalStorage<string>('name', '');
     const [email, setEmail] = useLocalStorage<string>("email", '');
-    const [group, setGroup] = useState<GroupEntity>()
+    const [responses, setResponses]= useLocalStorage<string[]>("responses", []);
+    const [group, setGroup] = useState<GroupEntity>();
+
 
     const navigate = useNavigate();
 
@@ -23,11 +25,10 @@ const JoinGroup = () => {
     useEffect(()=>{
         const initializeGroup = async () => {
             if(groupId){
-                console.log(`<<< Fetching lists @MyListsScreen.initializeLists()`)
+                console.log(`<<< Fetching Group`)
                 const group = await fetchGroupById(groupId);
                 setGroup(group);
             }
-
         }
 
         initializeGroup();
@@ -40,8 +41,15 @@ const JoinGroup = () => {
 
     // button handlers
     const handleSubmit = async () => {
-        console.log(`${name} :: ${email}`);
-        await storeParticipant(groupId, name, email);
+        console.log(`<<< Fetching Or Create Participant ${name}, ${email}`)
+        const p= await fetchOrCreateParticipant(groupId, name, email);
+        if(p){
+            // participant already joined the group- so load their saved responses
+            if(responses.length){
+                console.log(`...loading saved responses over local storage`)
+            }
+            setResponses(p.guesses);
+        }
 
         navigate('/questions');
     }

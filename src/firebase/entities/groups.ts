@@ -1,6 +1,6 @@
 import { doc, getDoc, updateDoc, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore"; 
 import { firestore } from "../config";
-import type { GroupEntity } from "../types";
+import type { GroupEntity, ParticipantEntity } from "../types";
 
 
 interface GroupDbModel {
@@ -15,7 +15,6 @@ interface GroupDbModel {
         answer: string;
        
     }>;
-    
 }
   
 
@@ -58,13 +57,21 @@ async function fetchGroupById(id: string){
 }
 
 
-async function storeParticipant(id: string, name: string, email: string): Promise<void> {
+async function fetchOrCreateParticipant(id: string, name: string, email: string): Promise<ParticipantEntity | void> {
     try {
         console.log(`--> store new Participant ${name} in Group(${id})`);
         const group = await fetchGroupById(id);
         if(!group){
             console.log(`Group ${id} not found.`);
             return undefined;
+        }
+
+        const participant= group.participants.find((p)=> p.name === name && p.email === email);
+        if(participant){
+            console.log(`Participant already belongs to this group and has guesses:`);
+            console.log(participant.guesses)
+            
+            return participant
         }
 
         group.participants.push({
@@ -191,6 +198,6 @@ const createUser = async () => {
 
 export {
     fetchGroupById,
-    storeParticipant,
+    fetchOrCreateParticipant,
     storeParticipantsGuesses,
 }
