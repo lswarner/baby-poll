@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export const useLocalStorage = <T,>(key: string, fallbackState?: T) : [T, (v: T) => void] => {
     const [value, setValue]= useState<T>(
@@ -7,9 +7,11 @@ export const useLocalStorage = <T,>(key: string, fallbackState?: T) : [T, (v: T)
             : fallbackState ?? ''
     );
 
-    useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(value));
-    }, [value, key])
+    const setLocalStoreValue = (v:T) => {
+        setValue(v);
+        console.log(`setting LOCAL STORAGE: ${v}`)
+        localStorage.setItem(key, JSON.stringify(v));
+    }
 
-    return [value, setValue]
+    return [value, setLocalStoreValue]
 }
