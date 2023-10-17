@@ -57,45 +57,15 @@ const InnerRouter = () => {
           element: <IndexScreen />,
         },
         {
-          path: '*',
-          element: <Page404Screen />,
-        },
-      ],
-    },
-    {
-      path: '/questions',
-      element: <Layout />,
-      children: [
-        {
-          index: true,
+          path: '/questions',
           element: <QuestionsScreen />,
         },
         {
-          path: '*',
-          element: <Page404Screen />,
-        },
-      ],
-    },
-    {
-      path: '/summary',
-      element: <Layout />,
-      children: [
-        {
-          index: true,
+          path: '/summary',
           element: <SummaryScreen />,
         },
         {
-          path: '*',
-          element: <Page404Screen />,
-        },
-      ],
-    },
-    {
-      path: '/scorecard',
-      element: <Layout />,
-      children: [
-        {
-          index: true,
+          path: '/scorecard',
           element: <ScorecardScreen />,
         },
         {
