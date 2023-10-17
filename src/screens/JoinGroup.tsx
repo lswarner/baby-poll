@@ -56,14 +56,14 @@ const JoinGroup = () => {
                 
                 
                 <div className="flex flex-col md:flex-row justify-center md:justify-start">
-                    <div className="w-full text-center md:w-1/3">
+                    <div className="w-full text-center md:w-1/3 lg:w-2/5">
                     <div className="avatar">
-                        <div className="w-80 md:w-48 lg:64 mask mask-squircle">
+                        <div className="w-80 md:w-48 lg:w-80 mask mask-squircle">
                             <img src="/two-bumps.jpg" />
                         </div>
                     </div>
                     </div>
-                    <div className="py-2 px-2 mt-2 w-full md:w-2/3">
+                    <div className="py-2 px-2 mt-2 w-full md:w-2/3 lg:w-3/5">
                         <p className="text-2xl font-bold mb-3">Christina and Luke are having a girl!</p>
                         <p className="my-2">Celebrate with them by playing this baby-birthday guessing game.</p>
                         <p className="my-2">Just enter your name and email to get started. After the baby is born, we&apos;ll calculate the results, then contact you so you can see who guessed best.</p>
