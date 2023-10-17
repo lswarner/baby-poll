@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Outlet, RouteObject, useRoutes, BrowserRouter } from 'react-router-dom';
+import { Outlet, RouteObject, useRoutes, BrowserRouter, useNavigate } from 'react-router-dom';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
@@ -10,11 +10,30 @@ const ScorecardScreen = lazy(() => import('~/screens/Scorecard'));
 const Page404Screen = lazy(() => import('~/screens/404'));
 
 function Layout() {
+  const navigate = useNavigate();
+
+  const gotoHome = () => {
+    navigate('/');
+  }
+
   return (
     <div className="min-h-screen">
       <div className="bg-primary">
-        <div className="font-display text-4xl font-bold text-white absolute top-6 left-6 md:top-6 md:left-36">The Baby Pool</div>
-        <img className="object-contain absolute top-1 right-6 md:right-32 lg:right-36" src="/floaty.png"  width="70px" height="70px" />
+        <div 
+          className="font-display text-4xl font-bold text-white absolute top-6 left-6 md:top-6 md:left-36 hover:text-primary-focus hover:cursor-pointer"
+          onClick={gotoHome}
+        >
+          The Baby Pool
+        </div>
+        <div onClick={gotoHome}>
+          <img 
+            className="object-contain absolute top-1 right-6 md:right-32 lg:right-36 cursor-pointer" 
+            src="/floaty.png"  
+            width="70px" 
+            height="70px" 
+          />
+        </div>
+        
         <nav className="flex p-4 items-center">
           &nbsp;
         </nav>
@@ -27,8 +46,8 @@ function Layout() {
         <div className="bg-primary h-20">
           <div className="container mx-auto px-6">
             <ul>
-              <li>The Baby Pool</li>
-              <li>PRGRN.dev</li>
+              <li className="hover:underline hover:cursor-pointer" onClick={gotoHome}>The Baby Pool</li>
+              <li><a href="#">PRGRN.dev</a></li>
             </ul>
           </div>
         </div>
@@ -57,45 +76,15 @@ const InnerRouter = () => {
           element: <IndexScreen />,
         },
         {
-          path: '*',
-          element: <Page404Screen />,
-        },
-      ],
-    },
-    {
-      path: '/questions',
-      element: <Layout />,
-      children: [
-        {
-          index: true,
+          path: '/questions',
           element: <QuestionsScreen />,
         },
         {
-          path: '*',
-          element: <Page404Screen />,
-        },
-      ],
-    },
-    {
-      path: '/summary',
-      element: <Layout />,
-      children: [
-        {
-          index: true,
+          path: '/summary',
           element: <SummaryScreen />,
         },
         {
-          path: '*',
-          element: <Page404Screen />,
-        },
-      ],
-    },
-    {
-      path: '/scorecard',
-      element: <Layout />,
-      children: [
-        {
-          index: true,
+          path: '/scorecard',
           element: <ScorecardScreen />,
         },
         {

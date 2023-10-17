@@ -5,7 +5,7 @@ type Props = {
   description?: string;
 };
 
-const SERVICE_NAME = import.meta.env.VITE_SERVICE_NAME
+const SERVICE_NAME = 'Baby guessing game for family and friends'
 
 export const Head = ({ title, description }: Props) => (
   <Helmet>
