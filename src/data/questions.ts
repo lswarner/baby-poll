@@ -20,7 +20,7 @@ export const questions: Array<TextQuestion | MultipleChoiceQuestion> = [
         text: `What will her birthday be?`,
         subtext: `The due date is November 7`,
         type: `text`,
-        instructions: `Enter your answer with the full month written out`,
+        instructions: ``,
         placeholder: `November 7`
     } as TextQuestion,
     {
@@ -70,21 +70,21 @@ export const questions: Array<TextQuestion | MultipleChoiceQuestion> = [
         text: `How tall will she be?`,
         subtext: `The average girl measures 19.4". Owen was tall 21.25" tall.`,
         type: `text`,
-        instructions: `Please use inches ("). This is an American app and it does not know metric.`,
+        instructions: `Please use inches or cm.`,
         placeholder: `19.4"`
     } as TextQuestion,
     {
         text: `What will she weigh?`,
         subtext: `The average girl weighs 7 lb, 1 oz. Owen weighed 7 lb, 5 oz.`,
         type: `text`,
-        instructions: `Please use lbs and oz. Again, no hablo metric.`,
+        instructions: `Please use lbs, oz or kg.`,
         placeholder: `7 lb, 1 oz`,
     } as TextQuestion,
     {
         text: `How big will the bump get?`,
-        subtext: `The circumference of the girth was 42.75" on October 12.`,
+        subtext: `Hint: Christina normally has a 28" waist, but was at 42.75" on October 12.`,
         type: `text`,
-        instructions: `Please inches (") people.`,
-        placeholder: ``
+        instructions: `Please use inches or cm.`,
+        placeholder: `43.3"`
     } as TextQuestion
 ]

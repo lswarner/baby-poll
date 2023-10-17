@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom"
 import { useLocalStorage } from '~/hooks/useLocalStorage';
 
-import { fetchGroupById, fetchOrCreateParticipant, type GroupEntity } from "~/firebase";
+import { fetchOrCreateParticipant } from "~/firebase";
 
 
 const JoinGroup = () => {
@@ -10,7 +10,7 @@ const JoinGroup = () => {
     const [name, setName] = useLocalStorage<string>('name', '');
     const [email, setEmail] = useLocalStorage<string>("email", '');
     const [responses, setResponses]= useLocalStorage<string[]>("responses", []);
-    const [group, setGroup] = useState<GroupEntity>();
+
 
 
     const navigate = useNavigate();
@@ -20,23 +20,6 @@ const JoinGroup = () => {
         setGroupId('7HaxvKxuQ6MHqSYwp3Uz');
     }, [])
 
-
-    // fetch the group from db after groupId is set
-    useEffect(()=>{
-        const initializeGroup = async () => {
-            if(groupId){
-                console.log(`<<< Fetching Group`)
-                const group = await fetchGroupById(groupId);
-                setGroup(group);
-            }
-        }
-
-        initializeGroup();
-    }, []);
-
-    useEffect(()=>{
-        console.log(group)
-    }, [group]);
 
 
     // button handlers
@@ -106,7 +89,7 @@ const JoinGroup = () => {
                         <div className="text-xl font-bold mb-3">Enter your name and email to get started</div>
                         <div className="form-control w-full max-w-xs my-4">
                             <label className="label">
-                                <span className="label-text">What is your name?</span>
+                                <span className="label-text">What is your name? (firstname or nickname is fine)</span>
                             </label>
                             <input 
                                 type="text" 
