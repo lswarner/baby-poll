@@ -36,21 +36,29 @@ const Questions = () => {
     return (
         <div className="flex flex-col">
             
-            <div className="container mx-auto px-20 mt-10">
-                <div className="text-6xl font-bold text-primary-focus font-display">Christina + Luke&apos;s Prenatal Pool</div>
+            <div className="container mx-auto px-2 mt-6 md:px-20 md:mt-10">
+                <div className="text-4xl md:text-6xl font-bold text-primary-focus font-display">Christina + Luke&apos;s Baby Pool</div>
             </div>
 
-            <div className="container mx-auto px-20 lg:w-4/5 mt-10">
+            <div className="container mx-auto px-2 mt-6 md:px-20 md:mt-10 w-full md:w-4/5">
                 <div className="flex flex-row">
-                    <div className="w-1/5 text-5xl font-display text-primary-content py-4 px-4">
+                    <div className="hidden md:block w-1/5 text-5xl font-display text-primary-content py-4 px-4">
                         <div className="border-secondary border-r-4 border-b-4 pt-4 rounded-full w-20 h-20 text-center">
                             {count + 1}
                         </div>
                         
                     </div>
-                    <div className="w-4/5 bg-secondary p-4 rounded-xl">
-                        <div className="text-4xl font-bold font-display">{q.text}</div>
-                        {q.subtext && <div className="text-zinc-700">{q.subtext}</div>}
+                    <div className="w-full md:w-4/5 bg-secondary p-4 rounded-xl">
+                        <div className="flex flex-row">
+                            <div className="md:hidden w-1/5 border-black border-r-4 border-b-4 pt-2 text-3xl rounded-full w-12 h-12 text-center">
+                                {count + 1}
+                            </div>
+                            <div className="w-4/5 md:w-full ml-2 md:ml-0 flex flex-col">
+                                <div className="text-4xl font-bold font-display">{q.text}</div>
+                                {q.subtext && <div className="text-zinc-700">{q.subtext}</div>}
+                            </div>
+                        </div>
+                        
                         { q.type === 'text'
                             ? <RenderTextQuestion 
                                 question={q} 
