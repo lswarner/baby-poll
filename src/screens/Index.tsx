@@ -6,7 +6,7 @@ function Index() {
 
   return (
     <>
-      <Head title="TOP PAGE" />
+      <Head title="The Baby Pool" />
       <div className="">
         <JoinGroup />
       </div>
