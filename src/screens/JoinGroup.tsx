@@ -89,7 +89,7 @@ const JoinGroup = () => {
                         <div className="text-xl font-bold mb-3">Enter your name and email to get started</div>
                         <div className="form-control w-full max-w-xs my-4">
                             <label className="label">
-                                <span className="label-text">What is your name?</span>
+                                <span className="label-text">What is your name? (firstname or nickname is fine)</span>
                             </label>
                             <input 
                                 type="text" 

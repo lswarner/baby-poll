@@ -13,7 +13,7 @@ function Layout() {
   return (
     <div className="min-h-screen">
       <div className="bg-primary">
-        <div className="font-display text-4xl font-bold text-white absolute top-6 right-52">The Prenatal Pool</div>
+        <div className="font-display text-4xl font-bold text-white absolute top-6 right-52">The Baby Pool</div>
         <img className="object-contain absolute top-0 right-32" src="public/floaty.png"  width="70px" height="70px" />
         <nav className="flex p-4 items-center">
           &nbsp;
@@ -27,7 +27,7 @@ function Layout() {
         <div className="bg-primary h-20">
           <div className="container mx-auto px-20">
             <ul>
-              <li>The Prenatal Pool</li>
+              <li>The Baby Pool</li>
               <li>PRGRN.dev</li>
             </ul>
           </div>

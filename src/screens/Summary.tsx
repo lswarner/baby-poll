@@ -21,7 +21,7 @@ const Summary = () => {
     return (
         <div className="flex flex-col">
             <div className="container mx-auto px-20 mt-10">
-                <div className="text-6xl font-bold text-primary-focus font-display">Christina + Luke&apos;s Prenatal Pool</div>
+                <div className="text-6xl font-bold text-primary-focus font-display">Christina + Luke&apos;s Baby Pool</div>
             </div>
             
             
