@@ -45,24 +45,24 @@ const JoinGroup = () => {
 
     return (
         <div className="flex flex-col">
-            <div className="container mx-auto px-20 mt-10">
-                <div className="text-6xl font-bold text-primary-focus font-display">Christina + Luke&apos;s Prenatal Pool</div>
+            <div className="container mx-auto px-2 mt-6 md:px-20 md:mt-10">
+                <div className="text-4xl md:text-6xl font-bold text-primary-focus font-display">Christina + Luke&apos;s Baby Pool</div>
             </div>
             
          
-            <div className="container mx-auto px-20 mt-10">
+            <div className="container mx-auto px-2 mt-6 md:px-20 md:mt-10">
                 
                 
-                <div className="flex flex-row justify-start">
-                    <div className="w-1/3">
+                <div className="flex flex-col md:flex-row justify-center md:justify-start">
+                    <div className="w-full text-center md:w-1/3">
                     <div className="avatar">
-                        <div className="w-64 mask mask-squircle">
+                        <div className="w-80 md:w-64 mask mask-squircle">
                             <img src="/public/two-bumps.jpg" />
                         </div>
                     </div>
                     </div>
-                    <div className="py-2 px-2 mt-2 w-2/3">
-                        <p className="text-xl font-bold mb-3">Christina and Luke are having a girl!</p>
+                    <div className="py-2 px-2 mt-2 w-full md:w-2/3">
+                        <p className="text-2xl font-bold mb-3">Christina and Luke are having a girl!</p>
                         <p className="my-2">Celebrate with them by playing this baby-birthday guessing game.</p>
                         <p className="my-2">Just enter your name and email to get started. After the baby is born, we&apos;ll calculate the results, then contact you so you can see who guessed best.</p>
                     </div>
@@ -72,9 +72,9 @@ const JoinGroup = () => {
             </div>
      
 
-            <div className="container mx-auto px-20 mt-16">
-                <div className="flex flex-row justify-end">
-                    <div className="w-2/5 mr-10 mt-4">
+            <div className="container mx-auto px-2 md:mt-8 md:px-20 md:mt-16">
+                <div className="flex flex-col md:flex-row justify-end">
+                    <div className="w-full md:w-2/5 mr-10 mb-6 mt-2 md:mt-4 ">
                         <div className="chat chat-end">
                                 <div className="chat-bubble chat-bubble-secondary text-xl font-bold">When will she be born?</div>
                         </div>
@@ -85,11 +85,11 @@ const JoinGroup = () => {
                             <div className="chat-bubble chat-bubble-primary text-xl font-bold">What will her name will be?</div>
                         </div>
                     </div>
-                    <div className="py-4 px-4 w-3/5 bg-primary border-2 border-primary-focus rounded-xl">
-                        <div className="text-xl font-bold mb-3">Enter your name and email to get started</div>
+                    <div className="py-4 px-4 w-full md:w-3/5 bg-primary border-2 border-primary-focus rounded-xl">
+                        <div className="text-xl font-bold mb-3">Sign up to get started</div>
                         <div className="form-control w-full max-w-xs my-4">
                             <label className="label">
-                                <span className="label-text">What is your name? (firstname or nickname is fine)</span>
+                                <span className="label-text text-lg">What is your name?</span>
                             </label>
                             <input 
                                 type="text" 
@@ -101,7 +101,7 @@ const JoinGroup = () => {
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">What is your email?</span>
+                                <span className="label-text text-lg">What is your email?</span>
                             </label>
                             <input 
                                 type="text" 

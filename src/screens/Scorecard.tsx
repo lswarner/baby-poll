@@ -86,27 +86,30 @@ const Scorecard = () => {
 
     return (
         <div className="flex flex-col">
-            <div className="container mx-auto px-20 mt-10">
-                <div className="text-6xl font-bold text-primary-focus font-display">Christina + Luke&apos;s Baby Pool</div>
+            <div className="container mx-auto px-2 mt-6 md:px-20 md:mt-10">
+                <div className="text-4xl md:text-6xl font-bold text-primary-focus font-display">Christina + Luke&apos;s Baby Pool</div>
             </div>
             
             
-            <div className="container mx-auto px-20 mt-10">
+            <div className="container mx-auto px-2 mt-6 md:px-20 md:mt-10">
                 <div>Here&apos;s what the rest of the group is guessing.</div>
                 { questionsAndGuesses?.map(({question, guesses}, i) => {
                     const color = i %2 ? 'primary' : 'secondary';
 
                     return (
-                     <div className="flex flex-row mt-10" key={i}>
-                         <div className="w-1/5 text-5xl font-display text-primary-content py-4 px-4">
+                     <div className="flex flex-row mt-4" key={i}>
+                         <div className="hidden md:block md:w-1/5 text-5xl font-display text-primary-content py-4 px-4">
                              <div className={`border-${color} border-r-4 border-b-4 pt-4 rounded-full w-20 h-20 text-center`}>
                                  {i + 1}
                              </div>
                              
                          </div>
-                        <div className={`w-3/5 bg-${color} p-4 rounded-xl`}>
-                            <div className="text-4xl font-bold font-display pb-2">
-                                {question}
+                        <div className={`w-full md:w-3/5 bg-${color} p-4 rounded-xl`}>
+                            <div className="text-4xl font-bold font-display pb-2 flex flex-row">
+                                <div className="md:hidden w-1/5 border-black border-r-4 border-b-4 pt-2 text-3xl rounded-full w-12 h-12 text-center">
+                                    {i + 1}
+                                </div>
+                                <div className="w-4/5 md:w-full ml-2 md:ml-0">{question}</div>
                             </div>
                             <div className="bg-white px-4 py-1 rounded-md">
                                 {[...guesses].map( ([guess, names], ii) => (
