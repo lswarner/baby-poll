@@ -59,7 +59,7 @@ const JoinGroup = () => {
                     <div className="w-full text-center md:w-1/3">
                     <div className="avatar">
                         <div className="w-80 md:w-48 lg:64 mask mask-squircle">
-                            <img src="/public/two-bumps.jpg" />
+                            <img src="/two-bumps.jpg" />
                         </div>
                     </div>
                     </div>
