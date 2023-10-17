@@ -15,6 +15,7 @@ const Summary = () => {
 
     const handleSaveResponses = async () => {
         await storeParticipantsGuesses('7HaxvKxuQ6MHqSYwp3Uz', name, responses);
+        navigate('/scorecard')
     }
 
     return (
