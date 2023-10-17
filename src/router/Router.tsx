@@ -13,8 +13,8 @@ function Layout() {
   return (
     <div className="min-h-screen">
       <div className="bg-primary">
-        <div className="font-display text-4xl font-bold text-white absolute top-6 left-6 md:top-6 md:right-52">The Baby Pool</div>
-        <img className="object-contain absolute top-1 right-6 md:right-32" src="/floaty.png"  width="70px" height="70px" />
+        <div className="font-display text-4xl font-bold text-white absolute top-6 left-6 md:top-6 md:left-36">The Baby Pool</div>
+        <img className="object-contain absolute top-1 right-6 md:right-32 lg:right-36" src="/floaty.png"  width="70px" height="70px" />
         <nav className="flex p-4 items-center">
           &nbsp;
         </nav>

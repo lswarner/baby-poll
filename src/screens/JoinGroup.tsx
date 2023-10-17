@@ -4,6 +4,7 @@ import { useLocalStorage } from '~/hooks/useLocalStorage';
 
 import { fetchOrCreateParticipant } from "~/firebase";
 
+const gid= '7HaxvKxuQ6MHqSYwp3Uz';
 
 const JoinGroup = () => {
     const [groupId, setGroupId] = useLocalStorage<string>('groupId', '')
@@ -17,7 +18,7 @@ const JoinGroup = () => {
 
     // set the default groupId
     useEffect(() => {
-        setGroupId('7HaxvKxuQ6MHqSYwp3Uz');
+        setGroupId(gid);
     }, [])
 
 
@@ -41,6 +42,7 @@ const JoinGroup = () => {
         localStorage.clear();
         setName('');
         setEmail('');
+        setGroupId(gid); // DON'T clear the groupid
     }
 
     return (
@@ -56,7 +58,7 @@ const JoinGroup = () => {
                 <div className="flex flex-col md:flex-row justify-center md:justify-start">
                     <div className="w-full text-center md:w-1/3">
                     <div className="avatar">
-                        <div className="w-80 md:w-64 mask mask-squircle">
+                        <div className="w-80 md:w-48 lg:64 mask mask-squircle">
                             <img src="/public/two-bumps.jpg" />
                         </div>
                     </div>
