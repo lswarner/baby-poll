@@ -2,14 +2,77 @@ import { useState, useEffect } from 'react'
 import { fetchGroupById, type GroupEntity } from "~/firebase";
 import { useLocalStorage } from '~/hooks/useLocalStorage';
 import { questions } from '~/data/questions';
+import { parse, format } from 'date-fns'
+
+interface QuestionAndGuess {
+    question: string;
+    guesses: Map<string, string[]>;
+}
+
+
+type SorterParam = [key: string, value: string[]];
+
+
+const sortTimeOfDay = (a: SorterParam, b: SorterParam) => {
+    const sortedTimes= [
+        `Early Morning: 2am - 7am`,
+        `Morning: 7am - Noon`, 
+        `Afternoon: Noon - 5pm`,
+        `Evening: 5pm- 10pm`,
+        `Late Night: 10pm - 2 am`,
+    ];
+    const aI = sortedTimes.indexOf(a[0]);
+    const bI = sortedTimes.indexOf(b[0]);
+    console.log(`   ${a} is ${aI} & ${b} is ${bI}`);
+  
+    return aI - bI
+}
+
+
+const sorters = [
+    null,
+    sortTimeOfDay,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+]
+
+
+const displayDate = (d: string) => {
+    return format( parse(d, 'MM/dd', new Date()), 'MMMM do')
+}
+
+const displayInches = (d: string) => `${d}"`
+ 
+const formatGuessForDisplay = (i: number, guess: string): string => {
+    const formatters= [
+        displayDate,
+        null,
+        null,
+        null,
+        null,
+        displayInches,
+        null,
+        displayInches
+    ];
+
+    if(formatters[i] !== null){
+        // @ts-ignore
+        return formatters[i](guess)
+    }
+    return guess
+}
+
+
+
 
 const Scorecard = () => {
     const [groupId] = useLocalStorage<string>('groupId');
     const [group, setGroup] = useState<GroupEntity>();
-    const [questionsAndGuesses, setQuestionsAndGuesses]= useState<{
-        question: string;
-        guesses: Map<string, string[]>;
-    }[]>()
+    const [questionsAndGuesses, setQuestionsAndGuesses]= useState<QuestionAndGuess[]>()
     
 
       // fetch the group from db after groupId is set
@@ -27,26 +90,6 @@ const Scorecard = () => {
     }, []);
 
     useEffect(() => {
-
-        /*
-            participants: [
-                {'Luke',   guesses: ['a1','b1','c1']},
-                {'Vesper', guesses: ['a2','b1','c1']},
-            ]
-
-            guesses: [
-                {
-                    'a1': ['Luke'],
-                    'a2': ['Vesper']
-                },
-                {
-                    'b1': ['Luke', 'Vesper']
-                }
-                
-            ]
-
-        */
-       
 
         const qAndG = questions.map((q, i) => {
             const guesses= new Map<string, string[]>();
@@ -67,15 +110,18 @@ const Scorecard = () => {
                 }
             })
 
+            const sortedGuesses = sorters[i] !== null
+                /* @ts-ignore */
+                ? new Map([...guesses.entries()].sort(sorters[i]))
+                : new Map([...guesses.entries()].sort())
+
             return {
                 question: q.text,
-                guesses
+                guesses: sortedGuesses,
             }
 
         });
 
-
-        console.log(qAndG)
         setQuestionsAndGuesses(qAndG);
 
     }, [group]);
@@ -115,7 +161,7 @@ const Scorecard = () => {
                             <div className="bg-white px-4 py-1 rounded-md">
                                 {[...guesses].map( ([guess, names], ii) => (
                                     <div className={`flex flex-col py-2 border-b-2 ${borderColor} last:border-none`} key={ii}>
-                                        <div className="text-lg font-bold pr-2">{guess}</div>
+                                        <div className="text-lg font-bold pr-2">{formatGuessForDisplay(i, guess)}</div>
                                         <div className="text-slate-700 pl-6">{names.join(', ')}</div> 
                                     </div> 
                                 ))}
