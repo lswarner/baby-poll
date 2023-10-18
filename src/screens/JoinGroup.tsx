@@ -22,6 +22,9 @@ const JoinGroup = () => {
     }, [])
 
 
+    const gotoScorecard = () => {
+        navigate('/scorecard');
+    }
 
     // button handlers
     const handleSubmit = async () => {
@@ -65,8 +68,17 @@ const JoinGroup = () => {
                     </div>
                     <div className="py-2 px-2 mt-2 w-full md:w-2/3 lg:w-3/5">
                         <p className="text-2xl font-bold mb-3">Christina and Luke are having a girl!</p>
-                        <p className="my-2">Celebrate with them by playing this baby-birthday guessing game.</p>
-                        <p className="my-2">Just enter your name and email to get started. After the baby is born, we&apos;ll calculate the results, then contact you so you can see who guessed best.</p>
+                        <p className="mt-0">Celebrate with them by playing this baby-birthday guessing game.</p>
+                        <p className="mb-4">Just enter your <b>name</b> and <b>email</b> to get started.</p>
+                        <p className="my-4">
+                            After the baby is born, we&apos;ll calculate the results, 
+                            then contact you so you can see who guessed best. If another family member wants to guess using the same 
+                            browser, you can click the `sign out` button below to clear the saved guesses.
+                            <em>(And if one of the kids wants to play, but they don&apos;t have an email, you can make something up or put in an empty space.)</em>
+                        </p>
+                        <p className="my-4">Or you can skip straight to the&nbsp;
+                            <a className= "text-secondary-focus hover:underline cursor-pointer" onClick={gotoScorecard}>Scorecard</a> 
+                            &nbsp;to see everyone else&apos;s guesses. Don&apos;t be a copy-cat!</p>
                     </div>
                     
                 </div>
