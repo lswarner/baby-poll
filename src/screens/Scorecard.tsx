@@ -42,10 +42,21 @@ const sorters = [
 
 
 const displayDate = (d: string) => {
-    return format( parse(d, 'MM/dd', new Date()), 'MMMM do')
+    try{
+        const parsed= parse(d, 'MM/dd', new Date());
+        const formatted= format(parsed, 'MMMM do');
+        console.log(`display date: ${parsed} => ${formatted}`);
+
+        return formatted
+    }
+    catch(e){
+        console.log(`Error parsing and formatting date ${d}: ${e}`);
+        return d;
+    }
+    
 }
 
-const displayInches = (d: string) => `${d}"`
+// const displayInches = (d: string) => `${d}"`
  
 const formatGuessForDisplay = (i: number, guess: string): string => {
     const formatters= [
@@ -54,9 +65,9 @@ const formatGuessForDisplay = (i: number, guess: string): string => {
         null,
         null,
         null,
-        displayInches,
         null,
-        displayInches
+        null,
+        null
     ];
 
     if(formatters[i] !== null){
