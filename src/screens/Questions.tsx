@@ -3,7 +3,35 @@ import { useNavigate } from "react-router-dom"
 import { questions } from '../data/questions';
 import type { TextQuestion, MultipleChoiceQuestion } from '../data/questions'
 import { useLocalStorage } from '~/hooks/useLocalStorage';
+import parse from 'date-fns/parse'
+import format from 'date-fns/format'
 
+
+const formatDate = (guess: string) => {
+    
+    let f= "";
+    const split= guess.split(" ");
+    if(split[0].length === 3){
+        f = 'MMM' // "Oct"
+    } 
+    else {
+        f = 'MMMM' // "October"
+    }
+    if(split[1].length <= 2){
+        f += ' d' // "29"
+    }
+    else {
+        f += ' do' // "29th"
+    }
+    
+    console.log(`The guess is ${guess}, using format ${f}`);
+    const parsedDate= parse(guess, f, new Date());
+    const formattedDate = format(parsedDate, "MM/dd");
+    console.log(`  formatted to: ${formattedDate}`)
+
+
+    return format(parsedDate, "MMMM d");
+}
 
 const Questions = () => {
     const [count, setCount] = useState<number>(0);
@@ -13,9 +41,18 @@ const Questions = () => {
     const storeGuess = async (guess: string) => {
         console.log(`storing new guess: ${guess}`);
 
+        let formattedResponse= "" 
+        switch(count){
+            case 0:
+                formattedResponse= formatDate(guess);
+                break;
+            default:
+                formattedResponse= guess;
+        }
+
         // store guess locally
         const newResponses= responses;
-        newResponses[count] = guess;
+        newResponses[count] = formattedResponse;
         setResponses(newResponses);
         console.log(`updated responses: ${JSON.stringify(newResponses)}`)
         
