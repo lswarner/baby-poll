@@ -8,30 +8,36 @@ import format from 'date-fns/format'
 
 
 const formatDate = (guess: string) => {
+    try{
+        let f= "";
+        const split= guess.split(" ");
+        if(split[0].length === 3){
+            f = 'MMM' // "Oct"
+        } 
+        else {
+            f = 'MMMM' // "October"
+        }
+        if(split[1].length <= 2){
+            f += ' d' // "29"
+        }
+        else {
+            f += ' do' // "29th"
+        }
+        
+        console.log(`The guess is ${guess}, using format ${f}`);
+        const parsedDate= parse(guess, f, new Date());
+        const formattedDate = format(parsedDate, "MM/dd");
+        console.log(`  formatted to: ${formattedDate}`)
     
-    let f= "";
-    const split= guess.split(" ");
-    if(split[0].length === 3){
-        f = 'MMM' // "Oct"
-    } 
-    else {
-        f = 'MMMM' // "October"
-    }
-    if(split[1].length <= 2){
-        f += ' d' // "29"
-    }
-    else {
-        f += ' do' // "29th"
-    }
     
-    console.log(`The guess is ${guess}, using format ${f}`);
-    const parsedDate= parse(guess, f, new Date());
-    const formattedDate = format(parsedDate, "MM/dd");
-    console.log(`  formatted to: ${formattedDate}`)
-
-
-    return format(parsedDate, "MMMM d");
+        return formattedDate;
+    }
+    catch(e){
+        console.error(`Error while formatting date in a guess "${guess}": ${e}`);
+        return guess;
+    }
 }
+   
 
 const Questions = () => {
     const [count, setCount] = useState<number>(0);
